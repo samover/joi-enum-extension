@@ -51,7 +51,7 @@ describe('extensions', () => {
             const schema = Joi.object({
                 number: Joi.any().enum({ ONE: 1, TWO: 2 }),
             });
-            await expect(schema.validate({ numbers: 'THREE' })).rejects.toThrow('"numbers" must be one of [ONE, TWO]');
+            await expect(schema.validate({ numbers: 'THREE' })).rejects.toThrow('child "number" fails because ["number" must be one of [ONE, TWO]]');
         });
         it('does not interfere with .any()', async () => {
             const schema = Joi.any();
