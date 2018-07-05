@@ -45,3 +45,7 @@ const Joi = BaseJoi.extend(EnumExtension);
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgements
+
+Inspired by [joi-enums-extension](https://github.com/westyler/joi-enums-extension) by [WesTyler](https://github.com/WesTyler)
