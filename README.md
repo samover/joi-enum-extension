@@ -6,7 +6,7 @@ The `enum()` type extends on the `Joi.any()` type. The `enum` type takes an obje
 
 ```
 const BaseJoi = require('joi');
-const EnumExtension = require('joi-extension-enum');
+const EnumExtension = require('joi-extension-enums');
 const Joi = BaseJoi.extend(EnumExtension);
 
 const schema = Joi.any().enum({ ONE: 1, TWO: 2 });
@@ -30,7 +30,7 @@ For more examples, have a peek at the [tests](test/enum.test.js).
 
 ```
 const BaseJoi = require('joi');
-const EnumExtension = require('joi-extension-enum');
+const EnumExtension = require('joi-extension-enums');
 const Joi = BaseJoi.extend(EnumExtension);
 ```
 
