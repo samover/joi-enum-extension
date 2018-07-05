@@ -51,7 +51,27 @@ describe('extensions', () => {
             const schema = Joi.object({
                 number: Joi.any().enum({ ONE: 1, TWO: 2 }),
             });
-            await expect(schema.validate({ numbers: 'THREE' })).rejects.toThrow('child "number" fails because ["number" must be one of [ONE, TWO]]');
+            await expect(schema.validate({ number: 'THREE' })).rejects.toThrow('child "number" fails because ["number" must be one of [ONE, TWO]]');
+        });
+        it('enum is optional by default', async () => {
+            const schema = Joi.object({
+                number: Joi.any().enum({ ONE: 1, TWO: 2 }),
+            });
+            await expect(schema.validate({})).resolves.toEqual({});
+        });
+
+        it('sets a default value when provided and no value is passed', async () => {
+            const schema = Joi.object({
+                number: Joi.any().enum({ ONE: 1, TWO: 2 }).default('ONE'),
+            });
+            await expect(schema.validate({})).resolves.toEqual({ number: 1 })
+        })
+
+        it('fails when enum not present while flag is required', async () => {
+            const schema = Joi.object({
+                number: Joi.any().enum({ ONE: 1, TWO: 2 }).required(),
+            });
+            await expect(schema.validate({})).rejects.toThrow('child "number" fails because ["number" must be one of [ONE, TWO]]')
         });
         it('does not interfere with .any()', async () => {
             const schema = Joi.any();
