@@ -47,6 +47,12 @@ describe('extensions', () => {
             await expect(schema.validate('THREE')).rejects.toThrow('"value" must be one of [ONE, TWO]');
         });
 
+        it('fails on non-mapped values in object', async () => {
+            const schema = Joi.object({
+                number: Joi.any().enum({ ONE: 1, TWO: 2 }),
+            });
+            await expect(schema.validate({ numbers: 'THREE' })).rejects.toThrow('"numbers" must be one of [ONE, TWO]');
+        });
         it('does not interfere with .any()', async () => {
             const schema = Joi.any();
             const value = await schema.validate(true);
