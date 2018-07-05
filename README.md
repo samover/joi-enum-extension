@@ -9,24 +9,22 @@ const BaseJoi = require('joi');
 const EnumExtension = require('joi-extension-enum');
 const Joi = BaseJoi.extend(EnumExtension);
 
-const schema = Joi.object({
-  number: Joi.any().enum({ ONE: 1, TWO: 2 }),
-});
+const schema = Joi.any().enum({ ONE: 1, TWO: 2 });
 
-schema.validate({ number: 'TWO' }); // value: ({ number: 2 })
-schema.validate({ number: 'THREE' }); // ValidationError: "numbers" must be one of [ONE, TWO]
+schema.validate('TWO'); // value: 2
+schema.validate('THREE'); // ValidationError: "value" must be one of [ONE, TWO]
 ```
 
 You can also allow some extra *allowed* values:
 
 ```
-const schema = Joi.object({
-  number: Joi.any().allow(null, 4).enum({ ONE: 1, TWO: 2 }),
-});
+const schema = Joi.any().allow(null, 4).enum({ ONE: 1, TWO: 2 });
 
-schema.validate({ number: null }); // value: ({ number: null })
-schema.validate({ number: 5 }); // ValidationError: "numbers" must be one of [ONE, TWO, 4]
+schema.validate(null); // value: null
+schema.validate(5); // ValidationError: "value" must be one of [ONE, TWO, 4]
 ```
+
+For more examples, have a peek at the [tests](test/enum.test.js).
 
 ### Installing
 
