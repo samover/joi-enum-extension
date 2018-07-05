@@ -28,11 +28,7 @@ For more examples, have a peek at the [tests](test/enum.test.js).
 
 ### Installing
 
-```
-const BaseJoi = require('joi');
-const EnumExtension = require('joi-extension-enums');
-const Joi = BaseJoi.extend(EnumExtension);
-```
+`npm install joi-extension-enums`
 
 ## Running the tests
 
