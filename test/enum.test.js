@@ -35,6 +35,13 @@ describe('extensions', () => {
             });
             await expect(schema.validate({ numbers: ['TWO'] })).resolves.toEqual({ numbers: [2] })
         });
+        it('allows both enum keys AND values', async () => {
+            const schema = Joi.object({
+                number: Joi.any().enum({ ONE: 1, TWO: 2 }),
+            });
+            await expect(schema.validate({ number: 1 })).resolves.toEqual({ number: 1});
+
+        });
         it('works with allows null', async () => {
             const schema = Joi.object({
                 number: Joi.any().allow(null, 1).valid('abc').enum({ ONE: 1, TWO: 2 }),
@@ -54,9 +61,7 @@ describe('extensions', () => {
             await expect(schema.validate({ number: 'THREE' })).rejects.toThrow('child "number" fails because ["number" must be one of [ONE, TWO]]');
         });
         it('enum is optional by default', async () => {
-            const schema = Joi.object({
-                number: Joi.any().enum({ ONE: 1, TWO: 2 }),
-            });
+            const schema = Joi.object({ number: Joi.any().enum({ ONE: 1, TWO: 2 }) });
             await expect(schema.validate({})).resolves.toEqual({});
         });
 

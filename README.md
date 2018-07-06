@@ -24,6 +24,15 @@ schema.validate(null); // value: null
 schema.validate(5); // ValidationError: "value" must be one of [ONE, TWO, 4]
 ```
 
+Note that both the Enum key as value are considered valid:
+```
+const schema = Joi.any().enum({ ONE: 1, TWO: 2 });
+
+schema.validate('ONE'); // value: 1
+schema.validate(1); // value: 1
+```
+
+
 For more examples, have a peek at the [tests](test/enum.test.js).
 
 ### Installing
